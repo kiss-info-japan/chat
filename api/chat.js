@@ -1,4 +1,15 @@
 export default async function handler(req, res) {
+    // ✅ CORS ヘッダーを設定
+    res.setHeader("Access-Control-Allow-Origin", "*"); // すべてのオリジンを許可（必要に応じて変更）
+    res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS"); // 許可するHTTPメソッド
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization"); // 許可するヘッダー
+
+    // ✅ プリフライトリクエスト (CORS の事前確認リクエスト) の処理
+    if (req.method === "OPTIONS") {
+        return res.status(200).end();
+    }
+
+    // ✅ 許可するメソッドを確認
     if (req.method !== "POST") {
         return res.status(405).json({ error: "Method Not Allowed" });
     }

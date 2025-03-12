@@ -1,6 +1,5 @@
 export default async function handler(req, res) {
-    console.log("MISTRAL_API_KEY:", process.env.MISTRAL_API_KEY); // 環境変数の確認用
-    // ✅ CORS 設定（すべてのオリジンを許可）
+    // ✅ CORS ヘッダーを適用
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
     res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
@@ -47,4 +46,3 @@ export default async function handler(req, res) {
         res.status(500).json({ error: error.message });
     }
 }
-

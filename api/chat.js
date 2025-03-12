@@ -1,8 +1,8 @@
 export default async function handler(req, res) {
-    // ✅ CORS ヘッダーを設定
-    res.setHeader("Access-Control-Allow-Origin", "*"); // すべてのオリジンを許可（必要に応じて変更）
-    res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS"); // 許可するHTTPメソッド
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization"); // 許可するヘッダー
+    // ✅ CORS 設定（すべてのオリジンを許可）
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
 
     // ✅ プリフライトリクエスト (CORS の事前確認リクエスト) の処理
     if (req.method === "OPTIONS") {
@@ -19,7 +19,7 @@ export default async function handler(req, res) {
         return res.status(500).json({ error: "APIキーが設定されていません" });
     }
 
-    const { message } = req.body; // ユーザーの入力メッセージ
+    const { message } = req.body;
 
     try {
         const response = await fetch("https://api.mistral.ai/v1/chat/completions", {
@@ -46,3 +46,4 @@ export default async function handler(req, res) {
         res.status(500).json({ error: error.message });
     }
 }
+
